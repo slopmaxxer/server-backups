@@ -18,3 +18,5 @@ and README up to date whenever backup behavior, paths, service units or restore 
   README has restore instructions. No off-site destination is configured; these are same-disk copies.
 - Never commit archives, extracted data or real secrets. Keep the repository public MIT, commits signed
   and pushed, and check status before touching concurrent work.
+- Use small commits: one logical change per commit (with its tests/docs), each passing the checks above.
+  Don't bundle unrelated changes or a whole session's work into one commit.
