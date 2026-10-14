@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily backups of trough and slopd
+
+[Timer]
+OnCalendar=*-*-* 02:45:00 UTC
+RandomizedDelaySec=15min
+Persistent=yes
+Unit=slop-services-backup.service
+
+[Install]
+WantedBy=timers.target
