@@ -95,3 +95,17 @@ manifest mismatches, symlink rejection and retention boundaries. Fixture data ar
 A live backup was also created and independently verified on the server.
 
 MIT license. https://git.freifick.net/slop/server-backups
+
+## Nix
+
+`nix build` packages `slop-services-backup`, including Python and SQLite, and
+runs the synthetic fixture suite. `nix flake check` builds this check;
+`nix develop` provides Python/SQLite. Use `nix run . -- --help` for CLI options.
+Supported systems: x86_64-linux and aarch64-linux.
+
+Import `inputs.server-backups.nixosModules.default` and enable
+`services.slop-services-backup.enable`. Options `package`, `output`, `keep` and
+`calendar` control the executable, archive directory, retention and schedule.
+The root timer preserves service UID database access and requires the existing
+trough/slopd users, databases, media and `/etc/trough.env` described above. It does
+not provision those applications. Existing Arch deployment uses `./deploy.sh`.
