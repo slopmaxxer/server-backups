@@ -19,7 +19,7 @@ import tarfile
 import tempfile
 from urllib.parse import unquote, urlsplit
 
-MEDIA_NAME = re.compile(r'^[0-9A-Z]{26}\.(jpg|png|gif)$')
+MEDIA_NAME = re.compile(r"^[0-9A-Z]{26}\.(jpg|png|gif|mp4|m4a|webm|weba|mp3|ogg|wav|flac)$")
 ARCHIVE_NAME = re.compile(r'^services-\d{8}T\d{12}Z\.tar\.gz$')
 
 

@@ -67,6 +67,14 @@ class BackupTests(unittest.TestCase):
                 self.assertEqual(snapshot.execute('SELECT value FROM counters').fetchone()[0], 99)
             self.assertEqual(db.execute('SELECT value FROM counters').fetchone()[0], 99)
 
+    def test_video_and_audio_uploads_included(self):
+        names = ['01BBBBBBBBBBBBBBBBBBBBBBBB.mp4', '01CCCCCCCCCCCCCCCCCCCCCCCC.mp3']
+        with closing(sqlite3.connect(self.trough / 'trough.sqlite3')) as db, db:
+            db.executemany('INSERT INTO attachments VALUES (?)', [(n,) for n in names])
+        for n in names:
+            (self.trough / 'media' / n).write_bytes(b'fixture ' + n.encode())
+        self.assertEqual(self.snapshot()['media_files'], 3)
+
     def test_missing_referenced_media_refuses_snapshot(self):
         (self.trough / 'media' / NAME).unlink()
         with self.assertRaises(FileNotFoundError):
