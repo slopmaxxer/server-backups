@@ -46,6 +46,9 @@ def snapshot_database(source: Path, destination: Path, user: str | None) -> None
 def media_references(database: Path, host: str) -> set[str]:
     with readonly_database(database) as db:
         names = {row[0] for row in db.execute("SELECT file FROM attachments WHERE file != ''")}
+        # poster images of videos/audio (trough DB migration 28 and later)
+        if 'preview_file' in {row[1] for row in db.execute('PRAGMA table_info(attachments)')}:
+            names |= {row[0] for row in db.execute("SELECT preview_file FROM attachments WHERE preview_file != ''")}
         for avatar, header in db.execute('SELECT avatar, header FROM accounts'):
             for value in (avatar, header):
                 parsed = urlsplit(value)

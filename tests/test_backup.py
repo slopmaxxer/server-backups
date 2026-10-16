@@ -3,6 +3,7 @@ from contextlib import closing
 import json
 from pathlib import Path
 import sqlite3
+import shutil
 import tarfile
 import tempfile
 import unittest
@@ -74,6 +75,18 @@ class BackupTests(unittest.TestCase):
         for n in names:
             (self.trough / 'media' / n).write_bytes(b'fixture ' + n.encode())
         self.assertEqual(self.snapshot()['media_files'], 3)
+
+    def test_video_posters_are_referenced(self):
+        poster = '01DDDDDDDDDDDDDDDDDDDDDDDD.jpg'
+        with closing(sqlite3.connect(self.trough / 'trough.sqlite3')) as db, db:
+            db.execute("ALTER TABLE attachments ADD COLUMN preview_file TEXT NOT NULL DEFAULT ''")
+            db.execute('UPDATE attachments SET preview_file=?', (poster,))
+        with self.assertRaises(FileNotFoundError):
+            self.snapshot()
+        (self.trough / 'media' / poster).write_bytes(b'fixture poster')
+        for item in self.stage.iterdir():
+            shutil.rmtree(item) if item.is_dir() else item.unlink()
+        self.assertEqual(self.snapshot()['media_files'], 2)
 
     def test_missing_referenced_media_refuses_snapshot(self):
         (self.trough / 'media' / NAME).unlink()
