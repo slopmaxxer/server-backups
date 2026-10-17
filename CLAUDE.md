@@ -13,7 +13,7 @@ and README up to date whenever backup behavior, paths, service units or restore 
 - Archives: `/srv/backups/slop-services/`, directory 0700 and files 0600, root-owned. Retain 14 successful
   archives; restrict pruning to the exact owned name pattern. Keep failed runs from destroying old backups.
 - Timer `slop-services-backup.timer`: 02:45 UTC plus up to 15min delay, persistent. Root service uses
-  no network and never stops the applications. GitLab has a separate backup timer.
+  no network and never stops the applications.
 - `sudo python3 /usr/local/lib/slop-backups/backup.py --verify <archive>` is read-only toward live data.
   README has restore instructions. No off-site destination is configured; these are same-disk copies.
 - Never commit archives, extracted data or real secrets. Keep the repository public MIT, commits signed

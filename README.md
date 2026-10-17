@@ -5,7 +5,7 @@ Daily, verified local backups of the two SQLite services on freifick.net:
 - **trough**: a SQLite snapshot, uploaded media and `/etc/trough.env`.
 - **slopd**: a SQLite snapshot containing the guestbook, visitor counter and global pot.
 
-GitLab retains its existing separate backup timer. This does not copy the regenerable trough media
+This does not copy the regenerable trough media
 proxy cache. Source code and deployment files live in their GitHub repositories.
 
 ## Install / run
