@@ -6,7 +6,7 @@ Daily, verified local backups of the two SQLite services on freifick.net:
 - **slopd**: a SQLite snapshot containing the guestbook, visitor counter and global pot.
 
 GitLab retains its existing separate backup timer. This does not copy the regenerable trough media
-proxy cache. Source code and deployment files live in their GitLab repositories.
+proxy cache. Source code and deployment files live in their GitHub repositories.
 
 ## Install / run
 
@@ -94,7 +94,7 @@ Tests cover archive extraction and validation, committed WAL data, missing refer
 manifest mismatches, symlink rejection and retention boundaries. Fixture data are synthetic.
 A live backup was also created and independently verified on the server.
 
-MIT license. https://git.freifick.net/slop/server-backups
+MIT license. https://github.com/slopinger/server-backups
 
 ## Nix
 

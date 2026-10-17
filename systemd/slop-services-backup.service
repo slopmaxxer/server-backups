@@ -1,6 +1,6 @@
 [Unit]
 Description=Verified local backups of trough and slopd
-Documentation=https://git.freifick.net/slop/server-backups
+Documentation=https://github.com/slopinger/server-backups
 
 [Service]
 Type=oneshot
