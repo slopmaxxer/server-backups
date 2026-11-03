@@ -94,7 +94,7 @@ Tests cover archive extraction and validation, committed WAL data, missing refer
 manifest mismatches, symlink rejection and retention boundaries. Fixture data are synthetic.
 A live backup was also created and independently verified on the server.
 
-MIT license. https://github.com/slopinger/server-backups
+MIT license. https://github.com/slopmaxxer/server-backups
 
 ## Nix
 
